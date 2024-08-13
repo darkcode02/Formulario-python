@@ -1,72 +1,70 @@
-# Proyecto Talento Bancolombia
+FORMULARIO-PYTHON
 
-Este repositorio contiene el código fuente y la documentación para el proyecto "Reto Talento Bancolombia". Este proyecto tiene como objetivo desarrollar una aplicación web para gestionar guiones de producción.
+Este es un proyecto de tienda en línea para gestionar productos. La aplicación está construida con Django y utiliza una base de datos SQLite. El proyecto está dockerizado para facilitar su despliegue y gestión.
+Estructura del Proyecto
 
-## Características
+    Raíz del Proyecto:
+        Dockerfile: Archivo de configuración para construir la imagen Docker.
+        docker-compose.yml: Archivo de configuración para ejecutar el proyecto con Docker Compose.
+        manage.py: Script para gestionar la aplicación Django.
+        requirements.txt: Archivo que lista las dependencias de Python necesarias para el proyecto.
+        db.sqlite3: Base de datos SQLite para almacenar la información de los productos.
+        README.md: Este archivo de documentación.
 
-- Permite a los usuarios registrarse e iniciar sesión.
-- Los usuarios pueden crear, ver, editar y eliminar guiones de producción.
-- Los guiones pueden incluir título, descripción, posición del actor en la escena y una marca de importancia.
-- Los usuarios pueden marcar un guion como completado.
-- Interfaz de usuario intuitiva y fácil de usar.
+    Carpeta djangocrud:
+        __init__.py
+        asgi.py
+        settings.py
+        urls.py
+        wsgi.py
 
-## Tecnologías utilizadas
+    Carpeta tasks:
+        __init__.py
+        admin.py
+        apps.py
+        forms.py
+        models.py
+        tests.py
+        views.py
 
-- Django: un framework web de alto nivel escrito en Python.
-- HTML y CSS: para el diseño y la presentación de la interfaz de usuario.
-- SQLite: una base de datos ligera y fácil de usar para el almacenamiento de datos en desarrollo.
-- Git y GitHub: para el control de versiones y la colaboración en equipo.
+Requisitos Previos
 
-## Instalación
+Asegúrate de tener Docker y Docker Compose instalados en tu sistema. Si no los tienes, sigue las instrucciones a continuación para instalarlos:
+Instalación de Docker
 
-1. Clona este repositorio en tu máquina local:
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-bash
-git clone https://github.com/darkcode02/darkcode02-reto-talento-b-.git
+Instalación de Docker Compose
 
-    Crea un entorno virtual y activa el entorno virtual:
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.21.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
-bash
+Construcción y Ejecución de Contenedores
 
-python -m venv env
-source env/bin/activate  # En sistemas Unix/Linux
-env\Scripts\activate     # En sistemas Windows
+Para construir y ejecutar los contenedores, utiliza el siguiente comando:
 
-    Instala las dependencias del proyecto:
+docker-compose up --build
 
-bash
+Acceso a la Aplicación
 
-pip install -r requirements.txt
+Una vez que los contenedores estén en funcionamiento, accede a la aplicación en tu navegador web en la siguiente URL:
 
-    Realiza las migraciones de la base de datos:
+http://localhost:8000
 
-bash
+Migraciones de Base de Datos
 
-python manage.py migrate
+Si necesitas aplicar migraciones a la base de datos, ejecuta el siguiente comando:
 
-    Inicia el servidor de desarrollo:
+docker-compose run web python manage.py migrate
 
-bash
+Uso de la Aplicación
 
-python manage.py runserver
+Esta aplicación te permite gestionar productos en una tienda en línea. Puedes realizar las siguientes acciones:
 
-    Accede a la aplicación en tu navegador web en la dirección http://localhost:8000.
+    Crear productos
+    Leer detalles de productos
+    Actualizar información de productos
+    Eliminar productos
 
-Contribución
-
-Si deseas contribuir a este proyecto, sigue estos pasos:
-
-    Haz un fork del repositorio.
-    Clona tu fork en tu máquina local.
-    Crea una nueva rama para realizar tus cambios.
-    Haz tus modificaciones y asegúrate de que los cambios pasen las pruebas.
-    Haz commit de tus cambios y haz push a tu repositorio en GitHub.
-    Envía un pull request desde tu rama hacia la rama principal del repositorio original.
-
-
-
-
-Si tienes alguna pregunta o sugerencia, no dudes en ponerte en contacto con el equipo de desarrollo a través de las Issues de GitHub o por correo electrónico a tupabloarias12345@gmail.com.
-
-
-Este archivo README.md proporciona toda la información necesaria para entender, instalar y contribuir al proyecto en un formato Markdown fácil de leer y mantener.
+BY Juan Pablo Arias Betancur
