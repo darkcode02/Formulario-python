@@ -34,11 +34,11 @@ jobs:
 
   notify:
     docker:
-      - image: circleci/python:3.8  # Puedes usar cualquier imagen que soporte Python
+      - image: circleci/python:3.8  
     steps:
       - slack/notify:
-          event: fail  # Notificar solo si el job de test falla
-          channel: "${DEFAULT_CHANNEL_SLACK}"  # Usar la variable de entorno para el canal
+          event: fail  
+          channel: "${DEFAULT_CHANNEL_SLACK}"  
 
 workflows:
   version: 2
@@ -50,4 +50,4 @@ workflows:
             - build
       - notify:
           requires:
-            - test  # Este job de notificación se ejecuta si el job de test falla
+            - test  
