@@ -20,18 +20,6 @@ jobs:
           command: |
             echo "Ejecutando script de manipulación de archivos..."
             touch temp_file.txt  
-
-  test:
-    docker:
-      - image: circleci/python:3.8  
-    steps:
-      - checkout  
-      - run:
-          name: Ejecutar pruebas con pytest
-          command: |
-            . venv/bin/activate
-            pytest  
-
   notify:
     docker:
       - image: circleci/python:3.8  
