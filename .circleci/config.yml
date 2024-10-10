@@ -1,32 +1,47 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.,file:manage.py:.
 version: 2.1
+
 orbs:
-  python: circleci/python@2
+  slack: circleci/slack@4.3.2  # Integración con Slack usando el orb oficial
+
 jobs:
-  test-python:
-    # Install dependencies and run tests
+  build:
     docker:
-      - image: cimg/python:3.8-node
+      - image: circleci/python:3.8  
     steps:
       - checkout
-      - python/install-packages
       - run:
-          name: Run tests
-          command: python manage.py test
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
+          name: Instalar dependencias
+          command: |
+            python -m venv venv  
+            . venv/bin/activate   
+            pip install -r requirements.txt  
+      - run:
+          name: Ejecutar script de manipulación de archivos
+          command: |
+            echo "Ejecutando script de manipulación de archivos..."
+            touch temp_file.txt  
+
+  test:
     docker:
-      - image: cimg/base:stable
+      - image: circleci/python:3.8  
     steps:
-      # Replace this with steps to deploy to users
+      - checkout  
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: Ejecutar pruebas con pytest
+          command: |
+            . venv/bin/activate
+            pytest  
+
 workflows:
-  build-and-test:
+  version: 2
+  build_and_test:
     jobs:
-      - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      - build
+      - test:
+          requires:
+            - build
+      - slack/notify:
+          requires:
+            - test
+          event: fail  # Notificar solo si el job de test falla
+          channel: "${DEFAULT_CHANNEL_SLACK}"  # Usar la variable de entorno para el canal
