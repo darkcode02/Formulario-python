@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@5.0.0  # Asegúrate de usar la última versión
+  slack: circleci/slack@5.0.0  
 
 jobs:
   build:
@@ -14,12 +14,15 @@ jobs:
           command: |
             python -m venv venv  
             . venv/bin/activate   
-            pip instal -r requirements.txt  
+            pip install -r requirements.txt  
       - run:
           name: Ejecutar script de manipulación de archivos
           command: |
             echo "Ejecutando script de manipulación de archivos..."
             touch temp_file.txt  
+      - run:
+          name: Forzar fallo
+          command: exit 1  
 
   notify:
     docker:
@@ -27,7 +30,7 @@ jobs:
     steps:
       - slack/notify:
           event: fail  
-          channel: "${SLACK_DEFAULT_CHANNEL}"  
+          channel: "${DEFAULT_CHANNEL_SLACK}"  
 
 workflows:
   version: 2
@@ -36,4 +39,4 @@ workflows:
       - build
       - notify:
           requires:
-            - build  # El job de notify se ejecuta solo si el job de build falla
+            - build  
