@@ -14,7 +14,7 @@ jobs:
           command: |
             python -m venv venv  
             . venv/bin/activate   
-            pip install -r requirements.txt  
+            pip instal -r requirements.txt  
       - run:
           name: Ejecutar script de manipulación de archivos
           command: |
