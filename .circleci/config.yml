@@ -20,17 +20,14 @@ jobs:
           command: |
             echo "Ejecutando script de manipulación de archivos..."
             touch temp_file.txt  
-      - run:
-          name: Forzar fallo
-          command: exit 1  
 
   notify:
     docker:
       - image: circleci/python:3.8  
     steps:
       - slack/notify:
-          event: fail  
-          channel: "${DEFAULT_CHANNEL_SLACK}"  
+          event: always  
+          channel: "${SLACK_DEFAULT_CHANNEL}"  
 
 workflows:
   version: 2
@@ -39,4 +36,4 @@ workflows:
       - build
       - notify:
           requires:
-            - build  
+            - build 
