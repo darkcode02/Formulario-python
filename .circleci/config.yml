@@ -27,7 +27,7 @@ jobs:
     steps:
       - slack/notify:
           event: fail  
-          channel: "${DEFAULT_CHANNEL_SLACK}"  
+          channel: "${SLACK_DEFAULT_CHANNEL}"  
 
 workflows:
   version: 2
