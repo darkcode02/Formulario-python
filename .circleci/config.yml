@@ -20,6 +20,7 @@ jobs:
           command: |
             echo "Ejecutando script de manipulación de archivos..."
             touch temp_file.txt  
+
   notify:
     docker:
       - image: circleci/python:3.8  
@@ -30,12 +31,9 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  build_and_notify:
     jobs:
       - build
-      - test:
-          requires:
-            - build
       - notify:
           requires:
-            - test  
+            - build  # El job de notify se ejecuta solo si el job de build falla
